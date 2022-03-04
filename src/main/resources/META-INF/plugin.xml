@@ -1,0 +1,23 @@
+<idea-plugin>
+    <id>org.example.plug</id>
+    <name>Test</name>
+    <vendor email="support@yourcompan.com">Test</vendor>
+    <description>description description description description description</description>
+    <idea-version since-build="210" until-build="213.0"/>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+        <action class="TTest" id="helloworld" text="Hello world">
+            <add-to-group group-id="ToolsMenu" anchor="first"></add-to-group>
+        </action>
+        <action id="Acttion" class="Acttion" text="Hello kotlin" description="descr">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>
