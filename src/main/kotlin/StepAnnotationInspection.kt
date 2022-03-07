@@ -1,4 +1,3 @@
-import StepMethodAnnotationInspection.Companion.STEP_ANNOTATION
 import com.intellij.codeInspection.AbstractBaseJavaLocalInspectionTool
 import com.intellij.codeInspection.LocalInspectionToolSession
 import com.intellij.codeInspection.ProblemHighlightType
@@ -8,6 +7,7 @@ import com.intellij.psi.JavaElementVisitor
 import com.intellij.psi.PsiAnnotation
 import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.PsiMethod
+import common.STEP_ANNOTATION
 
 /*
 TODO:   лишние (не хватающие) переносы строк
@@ -16,7 +16,6 @@ TODO:   лишние (не хватающие) переносы строк
         * дубликаты в SQL-запросах
         enum'ы с одинаковыми параметрами
         колличество коммитов в ПРе (не больше одного)
-        * разные описания в рамках одной фичи
         * двойные пробелы
 */
 class StepAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
@@ -37,9 +36,10 @@ class StepAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
                             )
                         } else {
                             val method = annotation.parent.parent as PsiMethod
-                            val params: String =
-                                (annotation.attributes.first().attributeValue as JvmAnnotationConstantValue).constantValue as String
-                            val notExistParams = method.parameters.filter { !params.contains("{${it.name!!}}") }.map { it.name }
+                            val params = (annotation.attributes.first().attributeValue as JvmAnnotationConstantValue).constantValue as String
+                            val notExistParams = method.parameters
+                                .filter { !params.contains("{${it.name!!}}") }
+                                .map { it.name }
                             if (notExistParams.isNotEmpty()) {
                                 holder.registerProblem(
                                     this,

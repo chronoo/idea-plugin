@@ -2,6 +2,7 @@ import com.intellij.codeInsight.AnnotationUtil
 import com.intellij.codeInsight.intention.AddAnnotationFix
 import com.intellij.codeInspection.*
 import com.intellij.psi.PsiClass
+import common.UTILITY_CLASS_ANNOTATION
 
 class LombokUtilityClassInspection : AbstractBaseJavaLocalInspectionTool() {
     override fun checkClass(
@@ -20,9 +21,5 @@ class LombokUtilityClassInspection : AbstractBaseJavaLocalInspectionTool() {
             }
         }
         resultsArray
-    }
-
-    companion object {
-        const val UTILITY_CLASS_ANNOTATION = "lombok.experimental.UtilityClass"
     }
 }

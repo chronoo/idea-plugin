@@ -1,8 +1,7 @@
-import TestClassNumberInspection.Companion.TEST_ANNOTATION
-import TestClassNumberInspection.Companion.TMS_LINK_ANNOTATION
 import com.intellij.codeInsight.intention.AddAnnotationFix
 import com.intellij.codeInspection.*
 import com.intellij.psi.PsiMethod
+import common.*
 
 class TestCaseAnnotationsInspection : AbstractBaseJavaLocalInspectionTool() {
     override fun checkMethod(
@@ -22,7 +21,7 @@ class TestCaseAnnotationsInspection : AbstractBaseJavaLocalInspectionTool() {
         }
 
         if (method.hasAnnotation(TEST_ANNOTATION)) {
-            if (method.containingClass?.name?.startsWith("Test_") == true) {
+            if (method.containingClass?.isTestClass == true) {
                 method.checkAnnotation(TMS_LINK_ANNOTATION)
                 method.checkAnnotation(EPIC_ANNOTATION)
                 method.checkAnnotation(FEATURE_ANNOTATION)
@@ -31,12 +30,5 @@ class TestCaseAnnotationsInspection : AbstractBaseJavaLocalInspectionTool() {
             }
         }
         resultsArray
-    }
-
-    companion object {
-        const val EPIC_ANNOTATION = "io.qameta.allure.Epic"
-        const val FEATURE_ANNOTATION = "io.qameta.allure.Feature"
-        const val STORY_ANNOTATION = "io.qameta.allure.Story"
-        const val DISPLAY_NAME_ANNOTATION = "io.qameta.allure.junit4.DisplayName"
     }
 }

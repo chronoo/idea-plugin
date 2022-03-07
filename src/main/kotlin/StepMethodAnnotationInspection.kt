@@ -2,7 +2,8 @@ import com.intellij.codeInsight.AnnotationUtil
 import com.intellij.codeInsight.intention.AddAnnotationFix
 import com.intellij.codeInspection.*
 import com.intellij.psi.PsiMethod
-import com.intellij.psi.PsiModifier
+import common.STEP_ANNOTATION
+import common.isPublic
 
 class StepMethodAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
     override fun checkMethod(
@@ -23,11 +24,4 @@ class StepMethodAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
         }
         resultsArray
     }
-
-    companion object {
-        const val STEP_ANNOTATION = "io.qameta.allure.Step"
-    }
 }
-
-val PsiMethod.isPublic
-    get() = modifierList.hasModifierProperty(PsiModifier.PUBLIC)

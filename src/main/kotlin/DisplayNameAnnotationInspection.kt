@@ -1,9 +1,11 @@
-import TestCaseAnnotationsInspection.Companion.DISPLAY_NAME_ANNOTATION
 import com.intellij.codeInspection.AbstractBaseJavaLocalInspectionTool
 import com.intellij.codeInspection.LocalInspectionToolSession
 import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.*
+import common.DISPLAY_NAME_ANNOTATION
+import common.containedClass
+import common.textValue
 
 class DisplayNameAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
     override fun buildVisitor(
@@ -37,9 +39,3 @@ class DisplayNameAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
             }
         }
 }
-
-val PsiAnnotation.textValue: String
-    get() = (parameterList.attributes.first().value as PsiLiteralExpression).value as String
-
-val PsiAnnotation.containedClass: String?
-    get() = (parent.parent.parent as PsiClass).name
