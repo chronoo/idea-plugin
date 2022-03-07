@@ -4,27 +4,31 @@
     <vendor email="support@yourcompan.com">Test</vendor>
     <description>description description description description description</description>
 
-    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
-         on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <localInspection language="JAVA"
-                         displayName="Test insp"
+                         displayName="Test insp 0"
                          groupName="Test"
                          enabledByDefault="true"
-                         implementationClass="StepsInspection">
+                         implementationClass="LombokUtilityClassInspection">
+        </localInspection>
 
+        <localInspection language="JAVA"
+                         displayName="Test insp 1"
+                         groupName="Test"
+                         enabledByDefault="true"
+                         implementationClass="StepMethodAnnotationInspection">
+        </localInspection>
+
+        <localInspection language="JAVA"
+                         displayName="Test insp 2"
+                         groupName="Test"
+                         enabledByDefault="true"
+                         implementationClass="StepAnnotationInspection">
         </localInspection>
     </extensions>
 
-    <actions>
-        <action class="TTest" id="helloworld" text="Hello world">
-            <add-to-group group-id="ToolsMenu" anchor="first"></add-to-group>
-        </action>
-        <action id="Acttion" class="Acttion" text="Hello kotlin" description="descr">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
-    </actions>
+    <actions></actions>
 </idea-plugin>

@@ -3,7 +3,7 @@ import com.intellij.codeInsight.intention.AddAnnotationFix
 import com.intellij.codeInspection.*
 import com.intellij.psi.PsiClass
 
-class StepsInspection : AbstractBaseJavaLocalInspectionTool() {
+class LombokUtilityClassInspection : AbstractBaseJavaLocalInspectionTool() {
     override fun checkClass(
         aClass: PsiClass,
         manager: InspectionManager,
@@ -23,6 +23,6 @@ class StepsInspection : AbstractBaseJavaLocalInspectionTool() {
     }
 
     companion object {
-        const val UTILITY_CLASS_ANNOTATION = "com.company.ann.StepMethod"
+        const val UTILITY_CLASS_ANNOTATION = "lombok.experimental.UtilityClass"
     }
 }
