@@ -42,6 +42,13 @@
                          enabledByDefault="true"
                          implementationClass="TestCaseAnnotationsInspection">
         </localInspection>
+
+        <localInspection language="JAVA"
+                         displayName="Display name annotation"
+                         groupName="Test"
+                         enabledByDefault="true"
+                         implementationClass="DisplayNameAnnotationInspection">
+        </localInspection>
     </extensions>
 
     <actions></actions>
