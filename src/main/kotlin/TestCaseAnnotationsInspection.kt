@@ -13,7 +13,7 @@ class TestCaseAnnotationsInspection : AbstractBaseJavaLocalInspectionTool() {
             if (!hasAnnotation(annotation)) {
                 registerProblem(
                     method,
-                    "Нет аннотации @${annotation.split(".").last()}",
+                    "Нет аннотации @${annotation.lastWord}",
                     ProblemHighlightType.WARNING,
                     AddAnnotationFix(annotation, method)
                 )
@@ -31,4 +31,7 @@ class TestCaseAnnotationsInspection : AbstractBaseJavaLocalInspectionTool() {
         }
         resultsArray
     }
+
+    private val String.lastWord
+        get() = split(".").last()
 }

@@ -4,6 +4,7 @@ import com.intellij.codeInspection.*
 import com.intellij.psi.PsiMethod
 import common.STEP_ANNOTATION
 import common.isPublic
+import common.isStepsClass
 
 class StepMethodAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
     override fun checkMethod(
@@ -11,7 +12,7 @@ class StepMethodAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
         manager: InspectionManager,
         isOnTheFly: Boolean
     ): Array<ProblemDescriptor>? = with(ProblemsHolder(manager, method.containingFile, isOnTheFly)) {
-        if (method.isPublic && method.containingClass?.name?.endsWith("Steps") == true) {
+        if (method.isPublic && method.containingClass?.isStepsClass == true) {
             if (!AnnotationUtil.isAnnotated(method, STEP_ANNOTATION, 0)) {
                 method.parameterList
                 registerProblem(

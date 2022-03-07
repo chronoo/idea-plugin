@@ -2,12 +2,12 @@ import com.intellij.codeInspection.AbstractBaseJavaLocalInspectionTool
 import com.intellij.codeInspection.LocalInspectionToolSession
 import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.codeInspection.ProblemsHolder
-import com.intellij.lang.jvm.annotation.JvmAnnotationConstantValue
 import com.intellij.psi.JavaElementVisitor
 import com.intellij.psi.PsiAnnotation
 import com.intellij.psi.PsiElementVisitor
-import com.intellij.psi.PsiMethod
 import common.STEP_ANNOTATION
+import common.containingMethod
+import common.textValue
 
 /*
 TODO:   лишние (не хватающие) переносы строк
@@ -35,10 +35,8 @@ class StepAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
                                 ProblemHighlightType.WARNING
                             )
                         } else {
-                            val method = annotation.parent.parent as PsiMethod
-                            val params = (annotation.attributes.first().attributeValue as JvmAnnotationConstantValue).constantValue as String
-                            val notExistParams = method.parameters
-                                .filter { !params.contains("{${it.name!!}}") }
+                            val notExistParams = containingMethod.parameters
+                                .filter { !textValue.contains("{${it.name!!}}") }
                                 .map { it.name }
                             if (notExistParams.isNotEmpty()) {
                                 holder.registerProblem(

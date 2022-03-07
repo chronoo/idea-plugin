@@ -4,7 +4,7 @@ import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.*
 import common.DISPLAY_NAME_ANNOTATION
-import common.containedClass
+import common.containingClass
 import common.textValue
 
 class DisplayNameAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
@@ -30,7 +30,7 @@ class DisplayNameAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
                         if (annotations.isNotEmpty()) {
                             holder.registerProblem(
                                 this,
-                                "Описание тест-кейса в аннотации @DisplayName неуникально ${annotations.map { it.containedClass }}",
+                                "Описание тест-кейса в аннотации @DisplayName неуникально ${annotations.map { it.containingClass }}",
                                 ProblemHighlightType.GENERIC_ERROR
                             )
                         }
