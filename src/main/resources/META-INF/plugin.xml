@@ -2,31 +2,45 @@
     <id>org.example.plug</id>
     <name>Test</name>
     <vendor email="support@yourcompan.com">Test</vendor>
-    <description>description description description description description</description>
+    <description>Плагин для контроля требования по разработке автотестов для smart-bio</description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <localInspection language="JAVA"
-                         displayName="Test insp 0"
+                         displayName="UtilityClass annotation for step-class"
                          groupName="Test"
                          enabledByDefault="true"
                          implementationClass="LombokUtilityClassInspection">
         </localInspection>
 
         <localInspection language="JAVA"
-                         displayName="Test insp 1"
+                         displayName="Step-annotation for step-method"
                          groupName="Test"
                          enabledByDefault="true"
                          implementationClass="StepMethodAnnotationInspection">
         </localInspection>
 
         <localInspection language="JAVA"
-                         displayName="Test insp 2"
+                         displayName="Step-annotations description"
                          groupName="Test"
                          enabledByDefault="true"
                          implementationClass="StepAnnotationInspection">
+        </localInspection>
+
+        <localInspection language="JAVA"
+                         displayName="Test-case's number"
+                         groupName="Test"
+                         enabledByDefault="true"
+                         implementationClass="TestClassNumberInspection">
+        </localInspection>
+
+        <localInspection language="JAVA"
+                         displayName="Test-method's annotations"
+                         groupName="Test"
+                         enabledByDefault="true"
+                         implementationClass="TestCaseAnnotationsInspection">
         </localInspection>
     </extensions>
 
