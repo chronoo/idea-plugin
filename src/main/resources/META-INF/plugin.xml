@@ -6,6 +6,7 @@
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
+    <depends>com.intellij.properties</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <localInspection language="JAVA"
@@ -56,7 +57,12 @@
                          enabledByDefault="true"
                          implementationClass="EnumElementsDuplicateInspection">
         </localInspection>
-    </extensions>
 
-    <actions></actions>
+        <localInspection language="Properties"
+                         displayName="Not allowed property changes"
+                         groupName="Test"
+                         enabledByDefault="true"
+                         implementationClass="NotAllowedPropertiesInspection">
+        </localInspection>
+    </extensions>
 </idea-plugin>
