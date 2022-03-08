@@ -9,4 +9,8 @@ fun PsiEnumConstant.equal(enum: PsiEnumConstant): Boolean =
 val PsiEnumConstant.params
     get() = argumentList?.expressions
         ?.map { it.children }
-        ?.flatMap { it.map { (it.context as PsiLiteralExpression).value } }
+        ?.flatMap { param ->
+            param.map { it.context }
+                .filterIsInstance(PsiLiteralExpression::class.java)
+                .map { it.value }
+        }

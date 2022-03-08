@@ -12,7 +12,7 @@ import common.textValue
 /*
 TODO:   лишние (не хватающие) переносы строк
         JavaDoc
-        колличество коммитов в ПРе (не больше одного)
+        количество коммитов в ПРе (не больше одного)
         * двойные пробелы
 */
 class StepAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
@@ -33,7 +33,7 @@ class StepAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
                             )
                         } else {
                             val notExistParams = containingMethod.parameters
-                                .filter { !textValue.contains("{${it.name!!}}") }
+                                .filter { textValue?.contains("{${it.name!!}}") ?: false}
                                 .map { it.name }
                             if (notExistParams.isNotEmpty()) {
                                 holder.registerProblem(
@@ -43,7 +43,6 @@ class StepAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
                                 )
                             }
                         }
-
                     }
                 }
             }

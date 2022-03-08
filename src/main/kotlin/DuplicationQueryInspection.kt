@@ -12,7 +12,7 @@ class DuplicationQueryInspection : AbstractBaseJavaLocalInspectionTool() {
         manager: InspectionManager,
         isOnTheFly: Boolean
     ): Array<ProblemDescriptor>? = with(ProblemsHolder(manager, method.containingFile, isOnTheFly)) {
-        if (method.containingClass?.isQueryClass == true) {
+        if (method.isExecuteMethod && method.containingClass?.isQueryClass == true) {
             val queryVar = method.sqlQueryVar
             if (queryVar != null) {
                 val list = method.containingFile.containingDirectory.files
@@ -20,7 +20,7 @@ class DuplicationQueryInspection : AbstractBaseJavaLocalInspectionTool() {
                     .filterIsInstance(PsiJavaFile::class.java)
                     .filter { it.classes.count() == 1 }
                     .mapNotNull { it.classes[0] }
-                    .mapNotNull { it.methods.firstOrNull { it.isExecuteMethod } }
+                    .mapNotNull { queryClass -> queryClass.methods.firstOrNull { it.isExecuteMethod } }
                     .filter { it.sqlQuery == queryVar.value }
 
                 if (list.isNotEmpty()) {
