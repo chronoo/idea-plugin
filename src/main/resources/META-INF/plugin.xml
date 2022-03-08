@@ -49,6 +49,13 @@
                          enabledByDefault="true"
                          implementationClass="DisplayNameAnnotationInspection">
         </localInspection>
+
+        <localInspection language="JAVA"
+                         displayName="Enumeration elements duplication"
+                         groupName="Test"
+                         enabledByDefault="true"
+                         implementationClass="EnumElementsDuplicateInspection">
+        </localInspection>
     </extensions>
 
     <actions></actions>
