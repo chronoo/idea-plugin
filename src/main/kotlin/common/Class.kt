@@ -10,3 +10,8 @@ val PsiClass.isStepsClass: Boolean
 
 val PsiClass.caseNumber: String?
     get() = name?.split("_")?.get(1)
+
+val PsiClass.isQueryClass: Boolean
+    get() = qualifiedName?.startsWith(QUERY_PACKAGE) == true
+
+const val QUERY_PACKAGE = "ru.sbrf.biometrics.query."

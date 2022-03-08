@@ -58,6 +58,13 @@
                          implementationClass="EnumElementsDuplicateInspection">
         </localInspection>
 
+        <localInspection language="JAVA"
+                         displayName="Sql-query duplication"
+                         groupName="Test"
+                         enabledByDefault="true"
+                         implementationClass="DuplicationQueryInspection">
+        </localInspection>
+
         <localInspection language="Properties"
                          displayName="Not allowed property changes"
                          groupName="Test"
