@@ -23,7 +23,7 @@ class DisplayNameAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
                             .filterIsInstance(PsiJavaFile::class.java)
                             .filter { it.classes.count() == 1 }
                             .mapNotNull { it.classes[0] }
-                            .mapNotNull { it.methods.first(PsiMethod::isDisplayNamed) }
+                            .mapNotNull { it.methods.firstOrNull(PsiMethod::isDisplayNamed) }
                             .mapNotNull { it.getAnnotation(DISPLAY_NAME_ANNOTATION) }
                             .filter { it != this }
                             .filter { it.textValue == this.textValue }
