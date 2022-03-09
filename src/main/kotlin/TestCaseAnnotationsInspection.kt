@@ -20,7 +20,7 @@ class TestCaseAnnotationsInspection : AbstractBaseJavaLocalInspectionTool() {
             }
         }
 
-        if (method.hasAnnotation(TEST_ANNOTATION)) {
+        if (method.isTestMethod) {
             if (method.containingClass?.isTestClass == true) {
                 method.checkAnnotation(TMS_LINK_ANNOTATION)
                 method.checkAnnotation(EPIC_ANNOTATION)

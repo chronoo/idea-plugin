@@ -8,7 +8,7 @@ class TestClassNumberInspection : AbstractBaseJavaLocalInspectionTool() {
         manager: InspectionManager,
         isOnTheFly: Boolean
     ): Array<ProblemDescriptor>? = with(ProblemsHolder(manager, method.containingFile, isOnTheFly)) {
-        if (method.hasAnnotation(TEST_ANNOTATION)) {
+        if (method.isTestMethod) {
             if (method.containingClass?.isTestClass == true) {
                 if (method.hasAnnotation(TMS_LINK_ANNOTATION)) {
                     val caseNumber = method.containingClass?.caseNumber

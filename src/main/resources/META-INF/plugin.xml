@@ -65,6 +65,13 @@
                          implementationClass="DuplicationQueryInspection">
         </localInspection>
 
+        <localInspection language="JAVA"
+                         displayName="Not-step action in test class"
+                         groupName="Test"
+                         enabledByDefault="true"
+                         implementationClass="NotStepActionsInspection">
+        </localInspection>
+
         <localInspection language="Properties"
                          displayName="Not allowed property changes"
                          groupName="Test"

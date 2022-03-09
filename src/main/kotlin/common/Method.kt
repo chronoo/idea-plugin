@@ -1,5 +1,6 @@
 package common
 
+import com.intellij.codeInsight.AnnotationUtil
 import com.intellij.psi.PsiLiteralExpression
 import com.intellij.psi.PsiLocalVariable
 import com.intellij.psi.PsiMethod
@@ -22,3 +23,6 @@ val PsiMethod.sqlQuery
 
 val PsiMethod.isExecuteMethod
     get() = name.contains("execute")
+
+val PsiMethod.isTestMethod
+    get() = AnnotationUtil.isAnnotated(this, TEST_ANNOTATION, 0)
