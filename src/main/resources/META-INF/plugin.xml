@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>org.example.plug</id>
-    <name>Test</name>
-    <vendor email="support@yourcompan.com">Test</vendor>
+    <name>Smart-Bio-Auto-Test Support</name>
+    <vendor>smart-bio</vendor>
     <description>Плагин для контроля требования по разработке автотестов для smart-bio</description>
 
     <depends>com.intellij.modules.platform</depends>
