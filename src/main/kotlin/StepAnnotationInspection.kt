@@ -32,14 +32,23 @@ class StepAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
                                 ProblemHighlightType.WARNING
                             )
                         } else {
-                            val notExistParams = containingMethod.parameters
-                                .filter { textValue?.contains("\\{${it.name!!}.*}".toRegex()) != true}
+                            val methodParameters = containingMethod.parameterList.parameters
+                            val notExistParams = methodParameters
+                                .filter { textValue?.contains("\\{${it.name}.*}".toRegex()) != true }
                                 .map { it.name }
-                            if (notExistParams.isNotEmpty()) {
-                                holder.registerProblem(
+
+                            when {
+                                methodParameters.isNotEmpty() && methodParameters.count() == notExistParams.count() ->
+                                    holder.registerProblem(
+                                        this,
+                                        "В аннотации @Step не указано ни одного параметра",
+                                        ProblemHighlightType.WARNING
+                                    )
+
+                                notExistParams.isNotEmpty() -> holder.registerProblem(
                                     this,
                                     "В аннотации @Step не указаны параметры $notExistParams",
-                                    ProblemHighlightType.WEAK_WARNING
+                                    ProblemHighlightType.POSSIBLE_PROBLEM
                                 )
                             }
                         }
