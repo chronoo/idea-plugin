@@ -33,7 +33,7 @@ class StepAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
                             )
                         } else {
                             val notExistParams = containingMethod.parameters
-                                .filter { textValue?.contains("{${it.name!!}}") ?: false}
+                                .filter { textValue?.contains("\\{${it.name!!}.*}".toRegex()) != true}
                                 .map { it.name }
                             if (notExistParams.isNotEmpty()) {
                                 holder.registerProblem(
