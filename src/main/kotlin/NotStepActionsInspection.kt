@@ -18,23 +18,30 @@ class NotStepActionsInspection : AbstractBaseJavaLocalInspectionTool() {
             override fun visitMethodCallExpression(expression: PsiMethodCallExpression?) {
                 if (expression?.parentOfType<PsiClass>()?.isTestClass == true) {
                     if (expression.parentsOfType<PsiMethod>().firstOrNull()?.isTestMethod == true) {
-                        expression.resolveMethod()?.let { method ->
-                            if (!AnnotationUtil.isAnnotated(method, STEP_ANNOTATION, 0)) {
-                                if (expression is CompositeElement) {
+                        if (expression is CompositeElement) {
+                            expression.resolveMethod()?.let { method ->
+                                if (method.byJava) return
+                                if (!AnnotationUtil.isAnnotated(method, STEP_ANNOTATION, 0)) {
                                     val children = expression.findChildByType(ElementType.REFERENCE_EXPRESSION)
                                     if (children is PsiReferenceExpression) {
-                                        val methodsExpressions = expression.parentsOfType<PsiMethodCallExpression>()
-                                            .lastOrNull()
-                                            ?.children?.firstOrNull()
-                                            ?.children?.filter { it.elementType == ElementType.IDENTIFIER }
+                                        val parentsOfType = expression.parentsOfType<PsiMethodCallExpression>()
+                                        val first = parentsOfType.firstOrNull()?.getChildRecursive()
+                                        setOf(
+                                            when (first) {
+                                                is PsiMethodCallExpression, null -> first
+                                                else -> first.parentOfType<PsiMethodCallExpression>()
+                                            }?.identifier,
 
-                                        methodsExpressions?.firstAndLastOrNull()?.forEach { methodExpression ->
-                                            holder.registerProblem(
-                                                methodExpression,
-                                                "Вызов не @Step-метода в тесте",
-                                                ProblemHighlightType.WARNING
-                                            )
-                                        }
+                                            parentsOfType.lastOrNull()?.identifier
+                                        ).filterNotNull()
+                                            .filter { it.text == method.name }
+                                            .forEach {
+                                                holder.registerProblem(
+                                                    it,
+                                                    "Вызов не @Step-метода в тесте",
+                                                    ProblemHighlightType.WARNING
+                                                )
+                                            }
                                     }
                                 }
                             }
@@ -44,10 +51,17 @@ class NotStepActionsInspection : AbstractBaseJavaLocalInspectionTool() {
             }
         }
 
-    private fun <T> List<T>.firstAndLastOrNull(): List<T>? =
-        when {
-            isEmpty() -> null
-            size == 1 -> listOf(first())
-            else -> listOf(first(), last())
+    private val PsiMethod.byJava
+        get() = containingClass?.qualifiedName?.startsWith("java.") ?: false
+
+    private val PsiElement.identifier
+        get() = children.firstOrNull()?.children?.lastOrNull { it.elementType == ElementType.IDENTIFIER }
+
+    private fun PsiElement.getChildRecursive(): PsiElement {
+        return when (firstChild) {
+            is PsiMethodCallExpression -> firstChild.getChildRecursive()
+            is PsiReferenceExpression -> firstChild.getChildRecursive()
+            else -> this
         }
+    }
 }
