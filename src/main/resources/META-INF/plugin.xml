@@ -12,70 +12,70 @@
         <localInspection language="JAVA"
                          displayName="UtilityClass annotation for step-class"
                          groupName="Test"
-                         enabledByDefault="true"
+                         enabledByDefault="false"
                          implementationClass="LombokUtilityClassInspection">
         </localInspection>
 
         <localInspection language="JAVA"
                          displayName="Step-annotation for step-method"
                          groupName="Test"
-                         enabledByDefault="true"
+                         enabledByDefault="false"
                          implementationClass="StepMethodAnnotationInspection">
         </localInspection>
 
         <localInspection language="JAVA"
                          displayName="Step-annotations description"
                          groupName="Test"
-                         enabledByDefault="true"
+                         enabledByDefault="false"
                          implementationClass="StepAnnotationInspection">
         </localInspection>
 
         <localInspection language="JAVA"
                          displayName="Test-case's number"
                          groupName="Test"
-                         enabledByDefault="true"
+                         enabledByDefault="false"
                          implementationClass="TestClassNumberInspection">
         </localInspection>
 
         <localInspection language="JAVA"
                          displayName="Test-method's annotations"
                          groupName="Test"
-                         enabledByDefault="true"
+                         enabledByDefault="false"
                          implementationClass="TestCaseAnnotationsInspection">
         </localInspection>
 
         <localInspection language="JAVA"
                          displayName="Display name annotation"
                          groupName="Test"
-                         enabledByDefault="true"
+                         enabledByDefault="false"
                          implementationClass="DisplayNameAnnotationInspection">
         </localInspection>
 
         <localInspection language="JAVA"
                          displayName="Enumeration elements duplication"
                          groupName="Test"
-                         enabledByDefault="true"
+                         enabledByDefault="false"
                          implementationClass="EnumElementsDuplicateInspection">
         </localInspection>
 
         <localInspection language="JAVA"
                          displayName="Sql-query duplication"
                          groupName="Test"
-                         enabledByDefault="true"
+                         enabledByDefault="false"
                          implementationClass="DuplicationQueryInspection">
         </localInspection>
 
         <localInspection language="JAVA"
                          displayName="Not-step action in test class"
                          groupName="Test"
-                         enabledByDefault="true"
+                         enabledByDefault="false"
                          implementationClass="NotStepActionsInspection">
         </localInspection>
 
         <localInspection language="Properties"
                          displayName="Not allowed property changes"
                          groupName="Test"
-                         enabledByDefault="true"
+                         enabledByDefault="false"
                          implementationClass="NotAllowedPropertiesInspection">
         </localInspection>
     </extensions>
