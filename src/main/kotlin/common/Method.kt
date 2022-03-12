@@ -26,3 +26,6 @@ val PsiMethod.isExecuteMethod
 
 val PsiMethod.isTestMethod
     get() = AnnotationUtil.isAnnotated(this, TEST_ANNOTATION, 0)
+
+val PsiMethod.isAssertMethod
+    get() = containingClass?.qualifiedName?.startsWith("org.junit.Assert") == true

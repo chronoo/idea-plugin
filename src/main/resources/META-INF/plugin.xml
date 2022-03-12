@@ -72,6 +72,13 @@
                          implementationClass="NotStepActionsInspection">
         </localInspection>
 
+        <localInspection language="JAVA"
+                         displayName="Assert without description"
+                         groupName="Test"
+                         enabledByDefault="false"
+                         implementationClass="AssertMessageDescriptionInspection">
+        </localInspection>
+
         <localInspection language="Properties"
                          displayName="Not allowed property changes"
                          groupName="Test"
