@@ -20,7 +20,7 @@ class NotStepActionsInspection : AbstractBaseJavaLocalInspectionTool() {
                     if (expression.parentsOfType<PsiMethod>().firstOrNull()?.isTestMethod == true) {
                         if (expression is CompositeElement) {
                             expression.resolveMethod()?.let { method ->
-                                if (method.byJava) return
+                                if (method.byJava || method.isBuilder) return
                                 if (!AnnotationUtil.isAnnotated(method, STEP_ANNOTATION, 0)) {
                                     val children = expression.findChildByType(ElementType.REFERENCE_EXPRESSION)
                                     if (children is PsiReferenceExpression) {
@@ -53,6 +53,9 @@ class NotStepActionsInspection : AbstractBaseJavaLocalInspectionTool() {
 
     private val PsiMethod.byJava
         get() = containingClass?.qualifiedName?.startsWith("java.") ?: false
+
+    private val PsiMethod.isBuilder
+        get() = containingClass?.name?.endsWith("Builder", ignoreCase = true) ?: false
 
     private val PsiElement.identifier
         get() = children.firstOrNull()?.children?.lastOrNull { it.elementType == ElementType.IDENTIFIER }
