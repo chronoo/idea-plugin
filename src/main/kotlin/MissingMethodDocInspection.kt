@@ -3,6 +3,7 @@ import com.intellij.codeInspection.*
 import com.intellij.psi.PsiMethod
 import common.STEP_ANNOTATION
 import common.isPublic
+import common.isTestMethod
 import fixs.AddJavaDocFix
 
 class MissingMethodDocInspection : AbstractBaseJavaLocalInspectionTool() {
@@ -11,7 +12,7 @@ class MissingMethodDocInspection : AbstractBaseJavaLocalInspectionTool() {
         manager: InspectionManager,
         isOnTheFly: Boolean
     ): Array<ProblemDescriptor>? = with(ProblemsHolder(manager, method.containingFile, isOnTheFly)) {
-        if (method.isPublic && method.docComment == null && !method.isStepMethod) {
+        if (!method.isTestMethod && method.isPublic && method.docComment == null && !method.isStepMethod) {
             registerProblem(
                 method,
                 "Отсутствует документация у метода",

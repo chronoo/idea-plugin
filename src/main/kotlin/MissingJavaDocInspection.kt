@@ -5,6 +5,7 @@ import com.intellij.psi.JavaElementVisitor
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElementVisitor
 import common.isCommentData
+import common.isTestClass
 import fixs.AddClassAuthorFix
 import fixs.AddClassDescriptionFix
 import fixs.AddClassJavaDocFix
@@ -14,31 +15,33 @@ class MissingJavaDocInspection : AbstractBaseJavaLocalInspectionTool() {
         object : JavaElementVisitor() {
             override fun visitClass(aClass: PsiClass?) {
                 aClass?.apply {
-                    if (docComment == null) {
-                        holder.registerProblem(
-                            aClass,
-                            "У класса нет документации",
-                            ProblemHighlightType.WARNING,
-                            AddClassJavaDocFix(aClass)
-                        )
-                    } else {
-                        val authorTag = docComment?.findTagByName("author")
-                        if (authorTag == null) {
+                    if (!isTestClass) {
+                        if (docComment == null) {
                             holder.registerProblem(
-                                docComment!!,
-                                "В документации нет тега @author",
+                                aClass,
+                                "У класса нет документации",
                                 ProblemHighlightType.WARNING,
-                                AddClassAuthorFix(docComment!!)
+                                AddClassJavaDocFix(aClass)
                             )
-                        }
-                        val comment = docComment?.children?.firstOrNull { it.isCommentData }
-                        if (comment != null && comment.text.isNullOrBlank()) {
-                            holder.registerProblem(
-                                docComment!!,
-                                "В документации нет описания класса",
-                                ProblemHighlightType.WARNING,
-                                AddClassDescriptionFix(docComment!!)
-                            )
+                        } else {
+                            val authorTag = docComment?.findTagByName("author")
+                            if (authorTag == null) {
+                                holder.registerProblem(
+                                    docComment!!,
+                                    "В документации нет тега @author",
+                                    ProblemHighlightType.WARNING,
+                                    AddClassAuthorFix(docComment!!)
+                                )
+                            }
+                            val comment = docComment?.children?.firstOrNull { it.isCommentData }
+                            if (comment != null && comment.text.isNullOrBlank()) {
+                                holder.registerProblem(
+                                    docComment!!,
+                                    "В документации нет описания класса",
+                                    ProblemHighlightType.WARNING,
+                                    AddClassDescriptionFix(docComment!!)
+                                )
+                            }
                         }
                     }
                 }
