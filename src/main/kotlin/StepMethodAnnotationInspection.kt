@@ -13,7 +13,7 @@ class StepMethodAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
         isOnTheFly: Boolean
     ): Array<ProblemDescriptor>? = with(ProblemsHolder(manager, method.containingFile, isOnTheFly)) {
         if (method.isPublic && method.containingClass?.isStepsClass == true) {
-            if (!AnnotationUtil.isAnnotated(method, STEP_ANNOTATION, 0)) {
+            if (method.isStepMethod) {
                 method.parameterList
                 registerProblem(
                     method,
@@ -26,3 +26,6 @@ class StepMethodAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
         resultsArray
     }
 }
+
+val PsiMethod.isStepMethod
+    get() = AnnotationUtil.isAnnotated(this, STEP_ANNOTATION, 0)

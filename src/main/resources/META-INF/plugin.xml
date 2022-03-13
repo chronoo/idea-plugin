@@ -86,6 +86,13 @@
                          implementationClass="MissingJavaDocInspection">
         </localInspection>
 
+        <localInspection language="JAVA"
+                         displayName="Missing method javaDoc"
+                         groupName="Test"
+                         enabledByDefault="false"
+                         implementationClass="MissingMethodDocInspection">
+        </localInspection>
+
         <localInspection language="Properties"
                          displayName="Not allowed property changes"
                          groupName="Test"
