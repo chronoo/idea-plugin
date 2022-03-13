@@ -79,6 +79,13 @@
                          implementationClass="AssertMessageDescriptionInspection">
         </localInspection>
 
+        <localInspection language="JAVA"
+                         displayName="Missing javaDoc"
+                         groupName="Test"
+                         enabledByDefault="false"
+                         implementationClass="MissingJavaDocInspection">
+        </localInspection>
+
         <localInspection language="Properties"
                          displayName="Not allowed property changes"
                          groupName="Test"
