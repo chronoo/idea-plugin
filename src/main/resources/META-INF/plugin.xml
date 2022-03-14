@@ -99,5 +99,7 @@
                          enabledByDefault="false"
                          implementationClass="NotAllowedPropertiesInspection">
         </localInspection>
+
+        <psi.referenceContributor language="JAVA" implementation="references.SampleReferenceContributor"/>
     </extensions>
 </idea-plugin>
