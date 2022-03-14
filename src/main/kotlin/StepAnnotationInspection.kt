@@ -38,7 +38,7 @@ class StepAnnotationInspection : AbstractBaseJavaLocalInspectionTool() {
                                 .map { it.name }
 
                             when {
-                                methodParameters.isNotEmpty() && methodParameters.count() == notExistParams.count() ->
+                                methodParameters.size > 1 && methodParameters.count() == notExistParams.count() ->
                                     holder.registerProblem(
                                         this,
                                         "В аннотации @Step не указано ни одного параметра",

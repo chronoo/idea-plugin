@@ -4,7 +4,10 @@ import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.JavaElementVisitor
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiElementVisitor
+import com.intellij.psi.PsiTypeParameter
+import com.intellij.psi.util.findParentOfType
 import common.isCommentData
+import common.isGenerated
 import common.isTestClass
 import fixs.AddClassAuthorFix
 import fixs.AddClassDescriptionFix
@@ -15,7 +18,7 @@ class MissingJavaDocInspection : AbstractBaseJavaLocalInspectionTool() {
         object : JavaElementVisitor() {
             override fun visitClass(aClass: PsiClass?) {
                 aClass?.apply {
-                    if (!isTestClass) {
+                    if (this !is PsiTypeParameter && !isGenerated && !isTestClass && findParentOfType<PsiClass>()?.isTestClass != true) {
                         if (docComment == null) {
                             holder.registerProblem(
                                 aClass,

@@ -29,3 +29,6 @@ val PsiMethod.isTestMethod
 
 val PsiMethod.isAssertMethod
     get() = containingClass?.qualifiedName?.startsWith("org.junit.Assert") == true
+
+val PsiMethod.isOverride
+    get() = AnnotationUtil.isAnnotated(this, OVERRIDE_ANNOTATION, 0)

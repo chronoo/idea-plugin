@@ -8,9 +8,7 @@ import com.intellij.psi.impl.source.tree.ElementType
 import com.intellij.psi.util.elementType
 import com.intellij.psi.util.parentOfType
 import com.intellij.psi.util.parentsOfType
-import common.STEP_ANNOTATION
-import common.isTestClass
-import common.isTestMethod
+import common.*
 
 class NotStepActionsInspection : AbstractBaseJavaLocalInspectionTool() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor =
@@ -21,7 +19,7 @@ class NotStepActionsInspection : AbstractBaseJavaLocalInspectionTool() {
                         if (expression is CompositeElement) {
                             expression.resolveMethod()?.let { method ->
                                 if (method.byJava || method.isBuilder) return
-                                if (!AnnotationUtil.isAnnotated(method, STEP_ANNOTATION, 0)) {
+                                if (!AnnotationUtil.isAnnotated(method, ALLOWED_ANNOTATIONS, 0)) {
                                     val children = expression.findChildByType(ElementType.REFERENCE_EXPRESSION)
                                     if (children is PsiReferenceExpression) {
                                         val parentsOfType = expression.parentsOfType<PsiMethodCallExpression>()
@@ -66,5 +64,9 @@ class NotStepActionsInspection : AbstractBaseJavaLocalInspectionTool() {
             is PsiReferenceExpression -> firstChild.getChildRecursive()
             else -> this
         }
+    }
+
+    companion object {
+        val ALLOWED_ANNOTATIONS = setOf(STEP_ANNOTATION, INVISIBLE_STEP_ANNOTATION)
     }
 }

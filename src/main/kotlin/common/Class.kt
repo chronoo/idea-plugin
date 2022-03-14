@@ -14,4 +14,7 @@ val PsiClass.caseNumber: String?
 val PsiClass.isQueryClass: Boolean
     get() = qualifiedName?.startsWith(QUERY_PACKAGE) == true
 
+val PsiClass.isGenerated: Boolean
+    get() = qualifiedName?.startsWith("generated.") == true || qualifiedName?.startsWith("org.") == true
+
 const val QUERY_PACKAGE = "ru.sbrf.biometrics.query."
