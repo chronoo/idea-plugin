@@ -16,7 +16,8 @@ class MissingMethodDocInspection : AbstractBaseJavaLocalInspectionTool() {
                 "Отсутствует документация у метода",
                 ProblemHighlightType.WARNING,
                 AddJavaDocFix(method),
-                AddAnnotationFix(STEP_ANNOTATION, method)
+                AddAnnotationFix(STEP_ANNOTATION, method),
+                AddAnnotationFix(INVISIBLE_STEP_ANNOTATION, method)
             )
         }
         resultsArray
