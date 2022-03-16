@@ -5,6 +5,7 @@ import com.intellij.openapi.vcs.changes.ChangeListManagerImpl
 import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.PsiFile
 
+@Deprecated("don't recommend it")
 class NotAllowedPropertiesInspection : PropertiesInspectionBase() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor =
         object : PsiElementVisitor() {

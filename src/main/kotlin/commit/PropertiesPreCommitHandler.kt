@@ -21,8 +21,17 @@ class PropertiesPreCommitHandler(private val panel: CheckinProjectPanel) : Check
                 "Проперти изменены",
                 UIUtil.getWarningIcon()
             )
-
-            if (yesNoDialogResult == Messages.YES) ReturnResult.COMMIT else ReturnResult.CANCEL
+            if (yesNoDialogResult == Messages.YES) {
+                val twiceYesNoDialog = Messages.showYesNoDialog(
+                    "Точно уверены?",
+                    "Подтверждение",
+                    UIUtil.getWarningIcon()
+                )
+                if (twiceYesNoDialog == Messages.YES) {
+                    return ReturnResult.COMMIT
+                }
+            }
+            ReturnResult.CANCEL
         }
     }
 

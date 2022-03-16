@@ -93,12 +93,12 @@
                          implementationClass="MissingMethodDocInspection">
         </localInspection>
 
-        <localInspection language="Properties"
-                         displayName="Not allowed property changes"
-                         groupName="Test"
-                         enabledByDefault="false"
-                         implementationClass="NotAllowedPropertiesInspection">
-        </localInspection>
+<!--        <localInspection language="Properties"-->
+<!--                         displayName="Not allowed property changes"-->
+<!--                         groupName="Test"-->
+<!--                         enabledByDefault="false"-->
+<!--                         implementationClass="NotAllowedPropertiesInspection">-->
+<!--        </localInspection>-->
 
         <prePushHandler implementation="push.MultipleCommitsPrePushHandler"/>
 
