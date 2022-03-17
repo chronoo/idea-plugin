@@ -7,6 +7,7 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
     <depends>com.intellij.properties</depends>
+    <depends>com.intellij.modules.vcs</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <localInspection language="JAVA"
@@ -93,12 +94,12 @@
                          implementationClass="MissingMethodDocInspection">
         </localInspection>
 
-<!--        <localInspection language="Properties"-->
-<!--                         displayName="Not allowed property changes"-->
-<!--                         groupName="Test"-->
-<!--                         enabledByDefault="false"-->
-<!--                         implementationClass="NotAllowedPropertiesInspection">-->
-<!--        </localInspection>-->
+        <!--        <localInspection language="Properties"-->
+        <!--                         displayName="Not allowed property changes"-->
+        <!--                         groupName="Test"-->
+        <!--                         enabledByDefault="false"-->
+        <!--                         implementationClass="NotAllowedPropertiesInspection">-->
+        <!--        </localInspection>-->
 
         <prePushHandler implementation="push.MultipleCommitsPrePushHandler"/>
 
@@ -106,4 +107,11 @@
 
         <psi.referenceContributor language="JAVA" implementation="references.SampleReferenceContributor"/>
     </extensions>
+
+    <actions>
+        <action id="Vcs.RunCommitTest" class="actions.RunCommitTestAction" text="Test" description="Run all test">
+            <add-to-group group-id="Dvcs.Log.ContextMenu" relative-to-action="ChangesView.CreatePatchFromChanges"
+                          anchor="after"/>
+        </action>
+    </actions>
 </idea-plugin>
