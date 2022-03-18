@@ -108,10 +108,10 @@
         <psi.referenceContributor language="JAVA" implementation="references.SampleReferenceContributor"/>
     </extensions>
 
-    <actions>
-        <action id="Vcs.RunCommitTest" class="actions.RunCommitTestAction" text="Test" description="Run all test">
-            <add-to-group group-id="Dvcs.Log.ContextMenu" relative-to-action="ChangesView.CreatePatchFromChanges"
-                          anchor="after"/>
-        </action>
-    </actions>
+<!--    <actions>-->
+<!--        <action id="Vcs.RunCommitTest" class="actions.RunCommitTestAction" text="Test" description="Run all test">-->
+<!--            <add-to-group group-id="Dvcs.Log.ContextMenu" relative-to-action="ChangesView.CreatePatchFromChanges"-->
+<!--                          anchor="after"/>-->
+<!--        </action>-->
+<!--    </actions>-->
 </idea-plugin>
