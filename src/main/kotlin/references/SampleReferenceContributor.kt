@@ -20,7 +20,7 @@ class SampleReferenceContributor : PsiReferenceContributor() {
             PlatformPatterns.psiElement(PsiLiteralExpression::class.java).inFile(psiFile(PsiJavaFileImpl::class.java))
                 .with(object : PatternCondition<PsiLiteralExpression?>("meth") {
                     override fun accepts(literal: PsiLiteralExpression, context: ProcessingContext?): Boolean {
-                        if (!literal.containingFile.name.startsWith("Test_") || literal.parentOfType<PsiAnnotationParameterList>() != null) return false
+                        if (!literal.containingFile.name.matches("^T\\d+$".toRegex()) || literal.parentOfType<PsiAnnotationParameterList>() != null) return false
                         return literal.parentOfType<PsiDeclarationStatement>() != null || literal.parentOfType<PsiExpressionList>() != null
                     }
                 }), SampleReferenceProvider()
