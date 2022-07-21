@@ -13,6 +13,7 @@ import com.intellij.psi.*
 import com.intellij.psi.impl.source.PsiJavaFileImpl
 import com.intellij.psi.util.parentOfType
 import com.intellij.util.ProcessingContext
+import common.inTestFile
 
 class SampleReferenceContributor : PsiReferenceContributor() {
     override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
@@ -20,7 +21,7 @@ class SampleReferenceContributor : PsiReferenceContributor() {
             PlatformPatterns.psiElement(PsiLiteralExpression::class.java).inFile(psiFile(PsiJavaFileImpl::class.java))
                 .with(object : PatternCondition<PsiLiteralExpression?>("meth") {
                     override fun accepts(literal: PsiLiteralExpression, context: ProcessingContext?): Boolean {
-                        if (!literal.containingFile.name.matches("^T\\d+$".toRegex()) || literal.parentOfType<PsiAnnotationParameterList>() != null) return false
+                        if (!literal.inTestFile || literal.parentOfType<PsiAnnotationParameterList>() != null) return false
                         return literal.parentOfType<PsiDeclarationStatement>() != null || literal.parentOfType<PsiExpressionList>() != null
                     }
                 }), SampleReferenceProvider()

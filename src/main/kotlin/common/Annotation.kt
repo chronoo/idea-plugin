@@ -16,3 +16,6 @@ val PsiAnnotation.containingClass: String?
 
 val PsiAnnotation.containingMethod: PsiMethod
     get() = parent.parent as PsiMethod
+
+val PsiAnnotation.className: String?
+    get() = resolveAnnotationType()?.name

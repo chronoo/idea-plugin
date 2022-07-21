@@ -106,6 +106,8 @@
         <checkinHandlerFactory id="prop" implementation="commit.PropertiesPreCommitExecutor" order="first"/>
 
         <psi.referenceContributor language="JAVA" implementation="references.SampleReferenceContributor"/>
+
+        <psi.referenceContributor language="JAVA" implementation="references.TestCaseReferenceContributor"/>
     </extensions>
 
 <!--    <actions>-->
